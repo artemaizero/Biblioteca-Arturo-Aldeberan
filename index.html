@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca Pública Arturo Aldebarán — San Rafael, Antioquia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Serif+4:opsz,wght@8..60,300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:   #085041;
+      --green-mid:    #0F6E56;
+      --green-light:  #1D9E75;
+      --green-pale:   #E1F5EE;
+      --green-border: #5DCAA5;
+      --green-soft:   #9FE1CB;
+      --amber-pale:   #FAEEDA;
+      --amber-dark:   #633806;
+      --blue-pale:    #E6F1FB;
+      --blue-dark:    #0C447C;
+      --purple-pale:  #EEEDFE;
+      --purple-dark:  #3C3489;
+      --coral-pale:   #FAECE7;
+      --coral-dark:   #712B13;
+      --text-1:       #1a1a18;
+      --text-2:       #555550;
+      --text-3:       #999990;
+      --bg-1:         #ffffff;
+      --bg-2:         #f7f7f5;
+      --bg-3:         #f0f0ee;
+      --border-1:     #d8d8d4;
+      --border-2:     #e8e8e4;
+      --radius-lg:    12px;
+      --radius-md:    8px;
+      --radius-sm:    6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      color: var(--text-1);
+      background: var(--bg-3);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    .bib-nav {
+      background: var(--bg-1);
+      border-bottom: 0.5px solid var(--border-2);
+      display: flex;
+      align-items: center;
+      padding: 0 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    }
+
+    .bib-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text-1);
+      padding: 1.1rem 1.6rem 1.1rem 0;
+      border-right: 0.5px solid var(--border-2);
+      margin-right: 1.2rem;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .nav-links { display: flex; }
+
+    .nav-link {
+      font-family: 'Source Serif 4', serif;
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--text-2);
+      padding: 1.1rem 1.15rem;
+      cursor: pointer;
+      border: none;
+      border-bottom: 2px solid transparent;
+      background: none;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .nav-link:hover { color: var(--text-1); }
+    .nav-link.active { color: var(--green-mid); border-bottom-color: var(--green-mid); font-weight: 500; }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.visible { display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--bg-1);
+      padding: 4rem 3rem 3.5rem;
+      border-bottom: 0.5px solid var(--border-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 300px;
+      line-height: 1;
+      color: var(--green-pale);
+      position: absolute;
+      right: 2rem;
+      top: -1.5rem;
+      pointer-events: none;
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 0.8rem;
+      font-weight: 400;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      font-weight: 600;
+      line-height: 1.18;
+      margin-bottom: 1rem;
+      max-width: 440px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-2);
+      font-weight: 300;
+      max-width: 420px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-cta {
+      margin-top: 1.8rem;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary {
+      font-family: 'Source Serif 4', serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 10px 22px;
+      border-radius: 24px;
+      background: var(--green-mid);
+      color: var(--green-pale);
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.12s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-secondary {
+      font-family: 'Source Serif 4', serif;
+      font-size: 13px;
+      font-weight: 400;
+      padding: 10px 22px;
+      border-radius: 24px;
+      background: none;
+      color: var(--text-2);
+      border: 0.5px solid var(--border-1);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: var(--bg-2); }
+
+    /* ── CONTENT ── */
+    .content { padding: 2.5rem 3rem; }
+
+    .section-label {
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 0.45rem;
+      font-weight: 400;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+      line-height: 1.25;
+    }
+
+    .divider {
+      height: 0.5px;
+      background: var(--border-2);
+      margin: 2rem 0;
+    }
+
+    /* ── CARDS GRID ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 13px;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--bg-1);
+      border: 0.5px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      padding: 1.3rem;
+      transition: border-color 0.15s, transform 0.12s;
+    }
+    .card:hover { border-color: var(--border-1); transform: translateY(-2px); }
+
+    .card-icon {
+      width: 38px; height: 38px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      margin-bottom: 0.9rem;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--text-2);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── KOHA ── */
+    .koha-banner {
+      background: var(--bg-1);
+      border: 0.5px solid var(--border-2);
+      border-left: 3px solid var(--green-mid);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1.3rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .koha-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--green-mid);
+      font-style: italic;
+      flex-shrink: 0;
+    }
+
+    .koha-text { flex: 1; min-width: 180px; }
+    .koha-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+    .koha-desc { font-size: 12.5px; color: var(--text-2); font-weight: 300; line-height: 1.65; }
+
+    .koha-btn {
+      font-family: 'Source Serif 4', serif;
+      font-size: 12.5px;
+      color: var(--green-mid);
+      font-weight: 500;
+      padding: 8px 16px;
+      border: 0.5px solid var(--green-border);
+      border-radius: 24px;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background: none;
+      transition: background 0.15s;
+    }
+    .koha-btn:hover { background: var(--green-pale); }
+
+    /* ── HORARIO ── */
+    .horario-box {
+      background: var(--bg-1);
+      border: 0.5px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .horario-header {
+      background: var(--green-mid);
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .h-header-text { color: var(--green-pale); }
+    .h-header-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+    .h-header-sub { font-size: 12px; font-weight: 300; opacity: 0.85; }
+
+    .horario-open {
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 0.5px solid var(--border-2);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .open-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+    .open-time { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--green-mid); }
+    .open-days { font-size: 12px; color: var(--text-2); font-weight: 300; margin-top: 2px; }
+
+    .open-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      border-radius: 24px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green-light);
+      animation: pulse 1.8s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .cierres-list { padding: 1rem 1.4rem 1.2rem; }
+    .cierres-title {
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-3);
+      margin-bottom: 0.8rem;
+    }
+
+    .cierre-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 0.5px solid var(--border-2);
+    }
+    .cierre-item:last-child { border-bottom: none; }
+
+    .cierre-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .cierre-text { font-size: 13px; color: var(--text-2); font-weight: 300; line-height: 1.55; }
+    .cierre-text strong { font-weight: 500; color: var(--text-1); font-size: 13px; display: block; margin-bottom: 1px; }
+
+    /* ── STATS ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 11px;
+      margin-bottom: 1.8rem;
+    }
+
+    .stat-box {
+      background: var(--bg-2);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.1rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-1);
+    }
+
+    .stat-lbl {
+      font-size: 11.5px;
+      color: var(--text-2);
+      margin-top: 3px;
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    /* ── AGENDA ── */
+    .event-card {
+      background: var(--bg-1);
+      border: 0.5px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 13px;
+      transition: transform 0.12s;
+    }
+    .event-card:hover { transform: translateY(-2px); }
+
+    .event-bar { height: 4px; }
+    .event-body { padding: 1.1rem 1.3rem; }
+
+    .event-tag {
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .event-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .event-desc {
+      font-size: 12.5px;
+      color: var(--text-2);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ── ITINERANTE ── */
+    .it-section {
+      background: var(--green-pale);
+      border: 0.5px solid var(--green-border);
+      border-radius: var(--radius-lg);
+      padding: 1.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .it-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 0.9rem;
+    }
+
+    .it-emoji { font-size: 28px; line-height: 1.1; }
+
+    .it-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 5px;
+    }
+
+    .it-new {
+      display: inline-block;
+      font-size: 10px;
+      background: var(--green-dark);
+      color: var(--green-pale);
+      padding: 2px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .it-desc {
+      font-size: 13.5px;
+      color: var(--green-mid);
+      font-weight: 300;
+      line-height: 1.75;
+      margin-bottom: 1.1rem;
+    }
+
+    .it-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .it-feat {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      border: 0.5px solid var(--green-soft);
+      font-size: 12.5px;
+      color: var(--green-mid);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .it-feat strong {
+      display: block;
+      font-weight: 500;
+      color: var(--green-dark);
+      margin-bottom: 3px;
+      font-size: 12.5px;
+    }
+
+    /* ── NOSOTROS / HISTORIA ── */
+    .sub-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 1.6rem;
+    }
+
+    .sub-btn {
+      font-family: 'Source Serif 4', serif;
+      font-size: 13px;
+      padding: 7px 18px;
+      border-radius: 24px;
+      border: 0.5px solid var(--border-1);
+      background: var(--bg-1);
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .sub-btn.active { background: var(--green-dark); color: var(--green-pale); border-color: var(--green-dark); }
+
+    .sub-page { display: none; }
+    .sub-page.visible { display: block; }
+
+    .historia-card {
+      background: var(--bg-1);
+      border: 0.5px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      padding: 1.8rem;
+      margin-bottom: 1.4rem;
+      overflow: hidden;
+    }
+
+    .year-stamp {
+      font-family: 'Playfair Display', serif;
+      font-size: 70px;
+      font-weight: 600;
+      color: var(--green-pale);
+      line-height: 1;
+      float: right;
+      margin-left: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hist-text {
+      font-size: 13.5px;
+      color: var(--text-2);
+      font-weight: 300;
+      line-height: 1.85;
+    }
+
+    .hist-text p { margin-bottom: 0.9rem; }
+    .hist-text p:last-child { margin-bottom: 0; }
+
+    .hist-text em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--text-1);
+    }
+
+    /* ── STAFF ── */
+    .staff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      gap: 13px;
+      margin-bottom: 1.3rem;
+    }
+
+    .staff-card {
+      background: var(--bg-1);
+      border: 0.5px solid var(--border-2);
+      border-radius: var(--radius-lg);
+      padding: 1.3rem;
+      text-align: center;
+      transition: transform 0.12s;
+    }
+    .staff-card:hover { transform: translateY(-2px); }
+
+    .staff-avatar {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 auto 0.8rem;
+    }
+
+    .staff-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .staff-role {
+      font-size: 11.5px;
+      color: var(--text-2);
+      font-weight: 300;
+      line-height: 1.45;
+    }
+
+    .staff-badge {
+      display: inline-block;
+      font-size: 10px;
+      margin-top: 8px;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .note {
+      font-size: 12.5px;
+      color: var(--text-3);
+      font-weight: 300;
+      line-height: 1.65;
+      margin-top: 0.5rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .bib-nav { padding: 0 1.2rem; }
+      .bib-logo { font-size: 13px; padding-right: 1rem; margin-right: 0.6rem; }
+      .nav-link { padding: 0.9rem 0.75rem; font-size: 12.5px; }
+      .hero { padding: 2.5rem 1.5rem 2rem; }
+      .hero::after { font-size: 180px; right: 0.5rem; opacity: 0.4; }
+      .hero-title { font-size: 28px; }
+      .content { padding: 1.8rem 1.5rem; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .it-grid { grid-template-columns: 1fr; }
+      .koha-banner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="bib-nav">
+    <div class="bib-logo" onclick="goTo('home',0)">Arturo Aldebarán</div>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="goTo('home',0)">Inicio</button>
+      <button class="nav-link" onclick="goTo('servicios',1)">Servicios</button>
+      <button class="nav-link" onclick="goTo('agenda',2)">Agenda cultural</button>
+      <button class="nav-link" onclick="goTo('nosotros',3)">Acerca de nosotros</button>
+    </div>
+  </nav>
+
+  <!-- ═══════ INICIO ═══════ -->
+  <div id="page-home" class="page visible">
+    <div class="hero">
+      <div class="hero-eyebrow">San Rafael, Antioquia · Fundada 1969</div>
+      <h1 class="hero-title">El conocimiento,<br>en tu casa.</h1>
+      <p class="hero-sub">La Biblioteca Pública Arturo Aldebarán lleva la lectura y la cultura a todos los rincones del municipio de San Rafael, incluidas las veredas más alejadas.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="goTo('servicios',1)">Nuestros servicios</button>
+        <button class="btn-secondary" onclick="goTo('agenda',2)">Agenda cultural</button>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section-label">Lo que ofrecemos</div>
+      <div class="section-title">Una biblioteca para todo San Rafael</div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon" style="background:#E1F5EE;">📚</div>
+          <div class="card-name">Préstamo y consulta</div>
+          <div class="card-desc">Más de 5.000 ejemplares. Un mes de plazo con dos renovaciones y carné digital con código QR o RFID.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:#E6F1FB;">🌐</div>
+          <div class="card-name">Catálogo en línea</div>
+          <div class="card-desc">Reserva libros antes de venir. Disponibilidad actualizada en tiempo real desde cualquier dispositivo.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:#FAEEDA;">🚐</div>
+          <div class="card-name">Biblioteca itinerante</div>
+          <div class="card-desc">Llevamos libros y actividades culturales a las veredas y barrios periféricos del municipio.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:#EEEDFE;">🎭</div>
+          <div class="card-name">Actividades culturales</div>
+          <div class="card-desc">Hora del cuento y talleres literarios con inscripción en línea y confirmaciones automáticas.</div>
+        </div>
+      </div>
+
+      <div class="section-label">Visítanos</div>
+      <div class="section-title" style="margin-bottom:1rem;">Horario de atención</div>
+      <div class="horario-box">
+        <div class="horario-header">
+          <span style="font-size:24px;">🕘</span>
+          <div class="h-header-text">
+            <div class="h-header-title">Abierto todos los días</div>
+            <div class="h-header-sub">Lunes a domingo · Jornada continua</div>
+          </div>
+        </div>
+        <div class="horario-open">
+          <div>
+            <div class="open-label">Horario</div>
+            <div class="open-time">9:00 am – 6:00 pm</div>
+            <div class="open-days">Lunes a domingo, incluidos festivos</div>
+          </div>
+          <div class="open-pill" id="pill-home"><div class="dot"></div> Verificando...</div>
+        </div>
+        <div class="cierres-list">
+          <div class="cierres-title">Días de cierre</div>
+          <div class="cierre-item">
+            <div class="cierre-dot" style="background:#D85A30;"></div>
+            <div class="cierre-text"><strong>1 de mayo</strong>Día Internacional del Trabajo.</div>
+          </div>
+          <div class="cierre-item">
+            <div class="cierre-dot" style="background:#D85A30;"></div>
+            <div class="cierre-text"><strong>Primeras dos semanas de agosto</strong>Cierre por inventario anual de la colección.</div>
+          </div>
+          <div class="cierre-item">
+            <div class="cierre-dot" style="background:#D85A30;"></div>
+            <div class="cierre-text"><strong>23 de diciembre al 9 de enero</strong>Cierre por temporada de fin de año.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ SERVICIOS ═══════ -->
+  <div id="page-servicios" class="page">
+    <div class="content">
+      <div class="section-label">Lo que ofrecemos</div>
+      <div class="section-title">Servicios de la biblioteca</div>
+
+      <div class="stats-row">
+        <div class="stat-box"><div class="stat-num">5.000</div><div class="stat-lbl">Ejemplares en colección</div></div>
+        <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Bibliotecarios de planta</div></div>
+        <div class="stat-box"><div class="stat-num">5</div><div class="stat-lbl">Computadoras para consulta</div></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-icon" style="background:#E1F5EE;">📚</div>
+          <div class="card-name">Préstamo de libros</div>
+          <div class="card-desc">Regístrate con datos básicos y recibe tu carné digital (QR o RFID). Plazo de un mes con dos renovaciones y notificaciones automáticas de vencimiento.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:#E6F1FB;">🔍</div>
+          <div class="card-name">Consulta en sala</div>
+          <div class="card-desc">Sala general de lectura, sala infantil y auditorio pequeño para actividades. Cinco computadoras con acceso a internet.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:#FAEEDA;">🌐</div>
+          <div class="card-name">Reserva en línea</div>
+          <div class="card-desc">Reserva tu libro antes de visitar la biblioteca. El catálogo muestra disponibilidad en tiempo real y bloquea el ejemplar al reservarlo.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="background:#EEEDFE;">🎭</div>
+          <div class="card-name">Actividades culturales</div>
+          <div class="card-desc">Inscríbete en línea a la hora del cuento y talleres literarios. El personal controla cupos y envía recordatorios automáticos.</div>
+        </div>
+      </div>
+
+      <div class="koha-banner">
+        <div class="koha-logo">Koha</div>
+        <div class="koha-text">
+          <div class="koha-title">Catálogo en línea — sistema Koha</div>
+          <div class="koha-desc">Nuestro SIGB está basado en Koha, una plataforma de código abierto. Consulta disponibilidad, realiza reservas y gestiona tus préstamos desde cualquier dispositivo, las 24 horas.</div>
+        </div>
+        <button class="koha-btn">Ir al catálogo →</button>
+      </div>
+
+      <div class="section-label">Visítanos</div>
+      <div class="section-title" style="margin-bottom:1rem;">Horario de atención</div>
+      <div class="horario-box">
+        <div class="horario-header">
+          <span style="font-size:24px;">🕘</span>
+          <div class="h-header-text">
+            <div class="h-header-title">Abierto todos los días</div>
+            <div class="h-header-sub">Lunes a domingo · Jornada continua</div>
+          </div>
+        </div>
+        <div class="horario-open">
+          <div>
+            <div class="open-label">Horario</div>
+            <div class="open-time">9:00 am – 6:00 pm</div>
+            <div class="open-days">Lunes a domingo, incluidos festivos</div>
+          </div>
+          <div class="open-pill" id="pill-servicios"><div class="dot"></div> Verificando...</div>
+        </div>
+        <div class="cierres-list">
+          <div class="cierres-title">Días de cierre</div>
+          <div class="cierre-item">
+            <div class="cierre-dot" style="background:#D85A30;"></div>
+            <div class="cierre-text"><strong>1 de mayo</strong>Día Internacional del Trabajo.</div>
+          </div>
+          <div class="cierre-item">
+            <div class="cierre-dot" style="background:#D85A30;"></div>
+            <div class="cierre-text"><strong>Primeras dos semanas de agosto</strong>Cierre por inventario anual de la colección.</div>
+          </div>
+          <div class="cierre-item">
+            <div class="cierre-dot" style="background:#D85A30;"></div>
+            <div class="cierre-text"><strong>23 de diciembre al 9 de enero</strong>Cierre por temporada de fin de año.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ AGENDA ═══════ -->
+  <div id="page-agenda" class="page">
+    <div class="content">
+      <div class="section-label">Programación</div>
+      <div class="section-title">Agenda cultural</div>
+
+      <div class="event-card">
+        <div class="event-bar" style="background:#7F77DD;"></div>
+        <div class="event-body">
+          <div class="event-tag" style="color:#7F77DD;">Para niños</div>
+          <div class="event-name">Hora del cuento</div>
+          <div class="event-desc">Sesiones de lectura en voz alta para los más pequeños. Inscripción en línea con cupos limitados. Recibirás una confirmación automática y un recordatorio antes del evento.</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-bar" style="background:#1D9E75;"></div>
+        <div class="event-body">
+          <div class="event-tag" style="color:#1D9E75;">Talleres</div>
+          <div class="event-name">Talleres literarios</div>
+          <div class="event-desc">Espacios de creación y lectura para jóvenes y adultos. El personal organiza calendarios, controla cupos, registra asistencia y puede emitir certificados de participación.</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-label">Nuevo servicio</div>
+      <div class="section-title" style="margin-bottom:1rem;">Biblioteca Itinerante</div>
+
+      <div class="it-section">
+        <div class="it-header">
+          <div class="it-emoji">🚐</div>
+          <div>
+            <div class="it-title">La biblioteca llega hasta ti</div>
+            <span class="it-new">Servicio nuevo</span>
+          </div>
+        </div>
+        <p class="it-desc">La Biblioteca Arturo Aldebarán lleva libros y actividades culturales a las veredas y barrios periféricos de San Rafael que no tienen acceso fácil a la sede principal. Los usuarios rurales acceden a los mismos beneficios que quienes visitan la biblioteca.</p>
+        <div class="it-grid">
+          <div class="it-feat"><strong>Rutas programadas</strong>Visitas a escuelas y veredas con calendario digital y notificaciones para la comunidad antes de cada salida.</div>
+          <div class="it-feat"><strong>Registro en campo</strong>Nuevos usuarios registrados en el lugar con tableta o celular. Sincronización en tiempo real con la base de datos central.</div>
+          <div class="it-feat"><strong>Reserva previa desde casa</strong>Solicita un libro antes de la visita itinerante para que el bibliotecario lo lleve directamente a tu vereda.</div>
+          <div class="it-feat"><strong>Recordatorios de devolución</strong>Notificaciones por SMS o WhatsApp para usuarios de las veredas, sin necesidad de desplazarse a la sede.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ ACERCA DE NOSOTROS ═══════ -->
+  <div id="page-nosotros" class="page">
+    <div class="content">
+
+      <div class="sub-toggle">
+        <button class="sub-btn active" onclick="showSub('historia', event)">Historia</button>
+        <button class="sub-btn" onclick="showSub('personal', event)">Personal</button>
+      </div>
+
+      <!-- Historia -->
+      <div id="sub-historia" class="sub-page visible">
+        <div class="section-label">Nuestra historia</div>
+        <div class="section-title">Desde 1969, el saber<br>es de todos.</div>
+        <div class="historia-card">
+          <div class="year-stamp">1969</div>
+          <div class="hist-text">
+            <p>La Biblioteca Pública Arturo Aldebarán nació gracias a <em>Carlos Alberto Arboleda Garcés</em>, conocido como «Sardino», un promotor cultural del municipio de San Rafael, inspirado en llevar el conocimiento y la cultura a la casa de los sanrafaelitas a través de los libros.</p>
+            <p>Inició solicitando donaciones a la iglesia, la alcaldía y la Gobernación de Antioquia. Pronto, la propia comunidad se unió donando sus propios ejemplares.</p>
+            <p>El nombre rinde homenaje a un escritor que Sardino conoció en un simposio en Medellín en 1947. Inspirado en su obra y su labor como docente, decidió que la biblioteca llevaría el seudónimo con el que ese autor publicó por un tiempo: <em>Arturo Aldebarán</em>.</p>
+            <p>Hoy la biblioteca cuenta con más de 5.000 ejemplares, sala general de lectura, sala infantil, auditorio y un servicio itinerante que lleva la lectura hasta las veredas más alejadas del municipio.</p>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-box"><div class="stat-num">+55</div><div class="stat-lbl">Años al servicio de San Rafael</div></div>
+          <div class="stat-box"><div class="stat-num">5.000</div><div class="stat-lbl">Ejemplares en colección</div></div>
+          <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Espacios: sala general, infantil y auditorio</div></div>
+        </div>
+      </div>
+
+      <!-- Personal -->
+      <div id="sub-personal" class="sub-page">
+        <div class="section-label">Nuestro equipo</div>
+        <div class="section-title">El personal de la biblioteca</div>
+        <div class="staff-grid">
+          <div class="staff-card">
+            <div class="staff-avatar" style="background:#E1F5EE; color:#085041;">B1</div>
+            <div class="staff-name">Bibliotecario/a de planta</div>
+            <div class="staff-role">Gestión de colección y préstamos</div>
+            <span class="staff-badge" style="background:#E1F5EE; color:#085041;">Planta</span>
+          </div>
+          <div class="staff-card">
+            <div class="staff-avatar" style="background:#E1F5EE; color:#085041;">B2</div>
+            <div class="staff-name">Bibliotecario/a de planta</div>
+            <div class="staff-role">Servicios al usuario y catálogo</div>
+            <span class="staff-badge" style="background:#E1F5EE; color:#085041;">Planta</span>
+          </div>
+          <div class="staff-card">
+            <div class="staff-avatar" style="background:#E1F5EE; color:#085041;">B3</div>
+            <div class="staff-name">Bibliotecario/a de planta</div>
+            <div class="staff-role">Agenda cultural e itinerante</div>
+            <span class="staff-badge" style="background:#E1F5EE; color:#085041;">Planta</span>
+          </div>
+          <div class="staff-card">
+            <div class="staff-avatar" style="background:#FAEEDA; color:#633806;">AV</div>
+            <div class="staff-name">Auxiliar voluntario/a</div>
+            <div class="staff-role">Apoyo en sala y actividades</div>
+            <span class="staff-badge" style="background:#FAEEDA; color:#633806;">Voluntario</span>
+          </div>
+          <div class="staff-card">
+            <div class="staff-avatar" style="background:#FAEEDA; color:#633806;">AV</div>
+            <div class="staff-name">Auxiliar voluntario/a</div>
+            <div class="staff-role">Apoyo en sala y actividades</div>
+            <span class="staff-badge" style="background:#FAEEDA; color:#633806;">Voluntario</span>
+          </div>
+        </div>
+        <p class="note">Los nombres del personal se actualizarán próximamente. Si deseas contactar a la biblioteca, puedes visitarnos de lunes a domingo de 9:00 am a 6:00 pm.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* ── NAVEGACIÓN ── */
+    function goTo(page, idx) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.getElementById('page-' + page).classList.add('visible');
+      document.querySelectorAll('.nav-link')[idx].classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ── SUB PÁGINAS ── */
+    function showSub(id, e) {
+      document.querySelectorAll('.sub-page').forEach(s => s.classList.remove('visible'));
+      document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('sub-' + id).classList.add('visible');
+      e.target.classList.add('active');
+    }
+
+    /* ── INDICADOR ABIERTO / CERRADO ── */
+    function isOpen() {
+      const now   = new Date();
+      const month = now.getMonth() + 1; // 1-12
+      const day   = now.getDate();
+      const time  = now.getHours() + now.getMinutes() / 60;
+
+      if (month === 5  && day === 1)                     return false; // 1 mayo
+      if (month === 8  && day >= 1  && day <= 14)        return false; // 1-14 agosto
+      if (month === 12 && day >= 23)                     return false; // 23-31 dic
+      if (month === 1  && day <= 9)                      return false; // 1-9 enero
+
+      return time >= 9 && time < 18;
+    }
+
+    function updatePills() {
+      const open = isOpen();
+      document.querySelectorAll('.open-pill').forEach(pill => {
+        if (open) {
+          pill.style.background = '#E1F5EE';
+          pill.style.color      = '#085041';
+          pill.innerHTML = '<div class="dot"></div> Abierto ahora';
+        } else {
+          pill.style.background = '#FAECE7';
+          pill.style.color      = '#712B13';
+          pill.innerHTML = '<div style="width:8px;height:8px;border-radius:50%;background:#D85A30;flex-shrink:0;"></div> Cerrado';
+        }
+      });
+    }
+
+    updatePills();
+    setInterval(updatePills, 60000);
+  </script>
+
+</body>
+</html>
