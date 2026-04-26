@@ -650,9 +650,23 @@
 <body>
 
   <!-- NAV -->
-  <nav class="bib-nav">
-    <div class="bib-logo" onclick="goTo('home',0)">Arturo Aldebarán</div>
-    <div class="nav-links">
+  <!-- NAV -->
+<nav class="bib-nav">
+  <div class="bib-logo" onclick="goTo('home',0)" style="display:flex;align-items:center;gap:10px;">
+    <img 
+      src="Arturo_Aldebarán.png" 
+      alt="Logo Biblioteca Arturo Aldebarán" 
+      style="height:38px;width:auto;display:block;"
+    />
+    Arturo Aldebarán
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="goTo('home',0)">Inicio</button>
+    <button class="nav-link" onclick="goTo('servicios',1)">Servicios</button>
+    <button class="nav-link" onclick="goTo('agenda',2)">Agenda cultural</button>
+    <button class="nav-link" onclick="goTo('nosotros',3)">Acerca de nosotros</button>
+  </div>
+</nav>
       <button class="nav-link active" onclick="goTo('home',0)">Inicio</button>
       <button class="nav-link" onclick="goTo('servicios',1)">Servicios</button>
       <button class="nav-link" onclick="goTo('agenda',2)">Agenda cultural</button>
